@@ -44,6 +44,7 @@ fun BookList(
 		navController,
 		pagedBooks = pagedBooks,
 		onSearchTextChanged = {
+			bookListViewModel.onEventChanged(BookListEvents.OnSearch(it))
 		}
 	)
 }

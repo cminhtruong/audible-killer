@@ -9,14 +9,18 @@ import javax.inject.Inject
 class BookRepository @Inject constructor(
 	private val bookDao: BookDao
 ) {
-	fun observePagedBooks(pagingConfig: PagingConfig): Flow<PagingData<Book>> {
-		return Pager(config = pagingConfig) {
-			bookDao.observePagedBooks()
+	fun observePagedBooks(query: String, pagingConfig: PagingConfig): Flow<PagingData<Book>> =
+		Pager(config = pagingConfig) {
+			if (query.isEmpty()) {
+				bookDao.observePagedBooks()
+			} else {
+				bookDao.search(query)
+			}
 		}.flow
-	}
 
 	suspend fun getBookById(id: Long): Book? = bookDao.getBookById(id)
 
 	suspend fun updateFavoriteById(isFavorite: Boolean, id: Long) =
 		bookDao.updateFavoriteById(if (isFavorite) 1 else 0, id)
+
 }

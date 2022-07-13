@@ -106,7 +106,7 @@ private fun BookDetailTopBar(
 			}) {
 				Icon(
 					imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-					contentDescription = "Toggle book favorite",
+					contentDescription = "Add book favorite",
 					tint = MaterialTheme.colorScheme.onSurface
 				)
 
@@ -114,7 +114,7 @@ private fun BookDetailTopBar(
 		},
 		navigationIcon = {
 			IconButton(onClick = { navController.navigateUp() }) {
-				Icon(Icons.Filled.ArrowBack, "backIcon")
+				Icon(Icons.Filled.ArrowBack, "back")
 			}
 		},
 		modifier = Modifier.windowInsetsPadding(

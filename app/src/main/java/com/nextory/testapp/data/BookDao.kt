@@ -14,4 +14,7 @@ interface BookDao {
 
 	@Query("UPDATE book SET isFavorite= :isFavorite WHERE id=:id")
 	suspend fun updateFavoriteById(isFavorite: Int, id: Long)
+
+	@Query("SELECT * FROM book WHERE author OR title LIKE '%' || :query || '%'")
+	fun search(query: String): PagingSource<Int, Book>
 }
