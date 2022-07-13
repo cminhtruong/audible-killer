@@ -16,4 +16,7 @@ class BookRepository @Inject constructor(
 	}
 
 	suspend fun getBookById(id: Long): Book? = bookDao.getBookById(id)
+
+	suspend fun updateFavoriteById(isFavorite: Boolean, id: Long) =
+		bookDao.updateFavoriteById(if (isFavorite) 1 else 0, id)
 }

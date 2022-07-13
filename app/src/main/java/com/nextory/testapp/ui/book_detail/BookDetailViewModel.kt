@@ -22,6 +22,10 @@ class BookDetailViewModel @Inject constructor(
 	val bookItem: State<BookDetailState> = _bookItem
 
 	init {
+		getBookDetail(savedStateHandle)
+	}
+
+	private fun getBookDetail(savedStateHandle: SavedStateHandle) {
 		savedStateHandle.get<Long>("id")?.let { id ->
 			_bookItem.value = BookDetailState(isLoading = true)
 			if (id != -1L) viewModelScope.launch(Dispatchers.IO) {
@@ -38,4 +42,14 @@ class BookDetailViewModel @Inject constructor(
 			} else _bookItem.value = BookDetailState(error = "The id does not exist")
 		}
 	}
+
+	fun onEventChanged(event: BookDetailEvent) {
+		if (event is BookDetailEvent.OnFavoriteChanged) {
+			viewModelScope.launch(Dispatchers.IO) {
+				repository.updateFavoriteById(event.isFavorite, event.book.id)
+			}
+		}
+	}
+
+
 }
