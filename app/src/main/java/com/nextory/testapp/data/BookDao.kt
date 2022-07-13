@@ -12,7 +12,7 @@ interface BookDao {
 	@Query("SELECT * FROM book WHERE id = :id")
 	suspend fun getBookById(id: Long): Book?
 
-	@Query("UPDATE book SET isFavorite= :isFavorite WHERE id=:id")
+	@Query("UPDATE book SET isFavorite = :isFavorite WHERE id=:id")
 	suspend fun updateFavoriteById(isFavorite: Int, id: Long)
 
 	@Query("SELECT * FROM book WHERE author OR title LIKE '%' || :query || '%'")

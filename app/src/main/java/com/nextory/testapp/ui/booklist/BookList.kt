@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -144,6 +145,15 @@ private fun BookItem(
 		},
 		secondaryText = { Text(book.author) }
 	) {
-		Text(book.title)
+		Row(Modifier.fillMaxWidth()) {
+			Text(book.title)
+			Spacer(modifier = Modifier.width(20.dp))
+			if (book.isFavorite) {
+				Icon(
+					imageVector = Icons.Filled.Favorite,
+					contentDescription = "is Favorite",
+				)
+			}
+		}
 	}
 }

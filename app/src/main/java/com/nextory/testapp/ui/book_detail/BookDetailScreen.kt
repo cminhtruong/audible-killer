@@ -27,7 +27,7 @@ fun BookDetail(
 		viewModel.onEventChanged(
 			BookDetailEvent.OnFavoriteChanged(
 				book = state.book!!,
-				isFavorite = state.book.isFavorite
+				isFavorite = !state.book.isFavorite
 			)
 		)
 	})

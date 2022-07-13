@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,7 +47,8 @@ class BookDetailViewModel @Inject constructor(
 	fun onEventChanged(event: BookDetailEvent) {
 		if (event is BookDetailEvent.OnFavoriteChanged) {
 			viewModelScope.launch(Dispatchers.IO) {
-				repository.updateFavoriteById(event.isFavorite, event.book.id)
+				Timber.e("favorite: ${event.isFavorite} and book: ${event.book}")
+				repository.updateFavoriteById(event.isFavorite, currentId!!)
 			}
 		}
 	}
